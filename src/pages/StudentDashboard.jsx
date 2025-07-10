@@ -67,6 +67,13 @@ const StudentDashboard = () => {
     return days;
   };
 
+  const handleLogout = () => {
+    sessionStorage.removeItem("user");
+    navigate("/");
+    toast.success("Logged out successfully!");
+  };
+
+
   const isPresent = (date) => {
     const d = date.toISOString().split("T")[0];
     return records.some((r) => r.date === d);
@@ -91,7 +98,7 @@ const StudentDashboard = () => {
         }`}
       >
         <h1 className="text-4xl font-extrabold text-indigo-800 mb-8 text-center">
-          Welcome, <span className="text-indigo-600">{user.username}</span>
+          Welcome, <span className="text-indigo-600">{user.name || user.username}</span>
         </h1>
 
         <SummaryCards
@@ -115,8 +122,14 @@ const StudentDashboard = () => {
             {showHistory ? "Close Calendar View" : "Open Calendar History"}
           </button>
         </div>
-      </div>
 
+        <div className="text-center mt-8">
+          <button onClick={handleLogout} className="px-6 py-2 text-white bg-red-600 hover:bg-red-700 transition rounded-lg font-semibold shadow w-40 h-15 text-[22px]">
+            Logout
+          </button>
+        </div>
+        
+      </div>
       <CalendarPanel
         showHistory={showHistory}
         setShowHistory={setShowHistory}
@@ -128,6 +141,7 @@ const StudentDashboard = () => {
         isPresent={isPresent}
         today={today}
       />
+
     </div>
   );
 };
