@@ -18,8 +18,6 @@ const AdminDashboard  = () => {
       localStorage.setItem("users", JSON.stringify(defaultAdmin));
       console.log("Default admin created: admin / admin123");
     }
-
-
     const attendance = JSON.parse(localStorage.getItem("attendanceData") || "[]");
     const regRequests = JSON.parse(localStorage.getItem("regRequests") || "[]");
 
@@ -43,13 +41,24 @@ const AdminDashboard  = () => {
     navigate("/");
   };
 
+  const totalStudents = JSON.parse(localStorage.getItem("users") || "[]").filter(u => u.role === "student").length;
+  const today = new Date().toISOString().split("T")[0];
+  const presentToday = records.filter(r => r.date === today).length;
+  const attendanceRate = totalStudents ? Math.round((presentToday / totalStudents) * 100) : 0;
+  
+
   return (
     <div className="min-h-screen bg-indigo-50">
       <TopNav onLogout={handleLogout} />
       <div className="flex">
         <Sidebar />
         <div className="flex-1 p-8">
-          <DashboardStats/>
+          <DashboardStats
+            totalStudents={totalStudents}
+            presentToday={presentToday}
+            pendingRequests={requests.length}
+            attendanceRate={attendanceRate}
+          />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <AttendanceTable records={records} />
             <RegistrationRequests requests={requests} approveRequest={approveRequest} />
