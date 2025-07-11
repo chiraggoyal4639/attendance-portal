@@ -30,11 +30,27 @@ const LoginModal = () => {
         window.location.href = "/student";
       }
     } else {
-      // Register: queue a request for admin approval
-      const existing = JSON.parse(localStorage.getItem("regRequests") || "[]");
-      existing.push({ name, username, password, date: new Date().toISOString() });
-      localStorage.setItem("regRequests", JSON.stringify(existing));
-      toast.success("Request sent! Admin will review your registration.", {duration: 2500});
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+      const existingRequests = JSON.parse(localStorage.getItem("regRequests") || "[]");
+
+      // Check if already approved
+      const userExists = users.some((u) => u.username === username);
+      if (userExists) {
+        toast.error("Username already exists or has already been approved.");
+        return;
+      }
+
+      // Check if a request from the same username already exists
+      const duplicatePending = existingRequests.some((r) => r.username === username);
+      if (duplicatePending) {
+        toast.error("A request with this username is already pending.");
+        return;
+      }
+
+      // If passed all checks, push the new request
+      existingRequests.push({ name, username, password, date: new Date().toISOString() });
+      localStorage.setItem("regRequests", JSON.stringify(existingRequests));
+      toast.success("Request sent! Admin will review your registration.", { duration: 2500 });
       setMode("login");
     }
   };

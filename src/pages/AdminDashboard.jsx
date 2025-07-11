@@ -26,14 +26,21 @@ const AdminDashboard  = () => {
   }, []);
 
   const approveRequest = (index) => {
-    const newRequests = [...requests];
-    const approvedUser = newRequests.splice(index, 1)[0];
+    let newRequests = [...requests];
+    const approvedUser = newRequests[index];
+
+    newRequests = newRequests.filter((r) => r.username !== approvedUser.username);
     setRequests(newRequests);
     localStorage.setItem("regRequests", JSON.stringify(newRequests));
 
     const users = JSON.parse(localStorage.getItem("users") || "[]");
-    users.push({ username: approvedUser.username, password: approvedUser.password, role: "student" });
+    users.push({
+      username: approvedUser.username,
+      password: approvedUser.password,
+      role: "student",
+    });
     localStorage.setItem("users", JSON.stringify(users));
+    toast.success(`Approved ${approvedUser.username} and rejected duplicates.`);
   };
 
   const handleLogout = () => {
