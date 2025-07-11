@@ -66,7 +66,7 @@ const LoginModal = () => {
         <h2 className="text-2xl font-bold text-center pb-3 text-purple-900">
           {mode === "login" ? (
             <>
-              <span className="underline text-indigo-600">Student</span> Login
+              <span className="text-[27px] text-indigo-600">Student/Admin</span> Login
             </>
           ) : (
             <>
