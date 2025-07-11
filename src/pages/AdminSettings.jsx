@@ -78,7 +78,7 @@ export default function AdminSettings() {
       <div className="flex">
         <Sidebar />
         <main className="flex-1 p-8">
-          <h2 className="text-3xl font-bold text-indigo-800 mb-8">Admin Settings</h2>
+          <h2 className="text-3xl font-bold text-rose-700 mb-8">Admin Settings</h2>
 
           {/* Update Admin Credentials */}
           <section className="bg-white p-6 rounded-lg shadow mb-10">

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DashboardStats from "../components/admin/stats.jsx";
+import DashboardStats from "../components/admin/Home/stats.jsx";
 import Sidebar from "../components/admin/sideBar.jsx";
-import AttendanceTable from "../components/admin/AttendanceTable.jsx";
-import RegistrationRequests from "../components/admin/RegistrationRequests.jsx";
+import AttendanceTable from "../components/admin/Home/AttendanceTable.jsx";
+import RegistrationRequests from "../components/admin/Home/RegistrationRequests.jsx";
 import TopNav from "../components/admin/TopNav.jsx";
 
 const AdminDashboard  = () => {
