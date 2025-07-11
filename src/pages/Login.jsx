@@ -70,7 +70,7 @@ const LoginModal = () => {
             </>
           ) : (
             <>
-              <span className="underline text-indigo-600">Request</span> Access
+              <span className="text-[28px] text-indigo-600">Request</span> Access
             </>
           )}
         </h2>
