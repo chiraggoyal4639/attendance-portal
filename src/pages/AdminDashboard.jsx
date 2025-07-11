@@ -41,11 +41,17 @@ const AdminDashboard  = () => {
     navigate("/");
   };
 
+  const rejectRequest = (index) => {
+    const updatedRequests = [...requests];
+    updatedRequests.splice(index, 1);
+    setRequests(updatedRequests);
+    localStorage.setItem("regRequests", JSON.stringify(updatedRequests));
+  };
+
   const totalStudents = JSON.parse(localStorage.getItem("users") || "[]").filter(u => u.role === "student").length;
   const today = new Date().toISOString().split("T")[0];
   const presentToday = records.filter(r => r.date === today).length;
   const attendanceRate = totalStudents ? Math.round((presentToday / totalStudents) * 100) : 0;
-  
 
   return (
     <div className="min-h-screen bg-indigo-50">
@@ -61,7 +67,7 @@ const AdminDashboard  = () => {
           />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <AttendanceTable records={records} />
-            <RegistrationRequests requests={requests} approveRequest={approveRequest} />
+            <RegistrationRequests requests={requests} approveRequest={approveRequest} rejectRequest={rejectRequest} />
           </div>
         </div>
       </div>

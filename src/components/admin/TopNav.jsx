@@ -9,7 +9,7 @@ const TopNav = ({ onLogout }) => {
           </h1>
           <button
             onClick={onLogout}
-            className="px-6 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-md transition-colors shadow"
+            className="px-7 pb-4 pt-2.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-md transition-colors shadow text-[20px]"
           >
             Logout
           </button>

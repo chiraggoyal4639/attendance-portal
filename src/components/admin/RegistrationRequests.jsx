@@ -1,6 +1,4 @@
-// src/components/RegistrationRequests.jsx
-
-const RegistrationRequests = ({ requests, approveRequest }) => {
+const RegistrationRequests = ({ requests, approveRequest, rejectRequest }) => {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200">
       <div className="px-6 py-4 border-b border-gray-200">
@@ -10,7 +8,10 @@ const RegistrationRequests = ({ requests, approveRequest }) => {
         {requests.length > 0 ? (
           <div className="space-y-4">
             {requests.slice(0, 3).map((r, i) => (
-              <div key={i} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200">
+              <div
+                key={i}
+                className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200"
+              >
                 <div className="flex-1">
                   <h3 className="font-medium text-gray-900">{r.name}</h3>
                   <p className="text-sm text-gray-600">@{r.username}</p>
@@ -25,7 +26,10 @@ const RegistrationRequests = ({ requests, approveRequest }) => {
                   >
                     Approve
                   </button>
-                  <button className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-medium rounded-md transition-colors">
+                  <button
+                    onClick={() => rejectRequest(i)}
+                    className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded-md transition-colors"
+                  >
                     Reject
                   </button>
                 </div>
